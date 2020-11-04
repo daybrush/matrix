@@ -52,6 +52,13 @@ function divide(
     }
 }
 
+/**
+ *
+ * @namespace Matrix
+ */
+/**
+ * @memberof Matrix
+ */
 export function ignoreDimension(
     matrix: number[],
     m: number,
@@ -68,6 +75,9 @@ export function ignoreDimension(
     return newMatrix;
 }
 
+/**
+ * @memberof Matrix
+ */
 export function invert(
     matrix: number[],
     n: number = Math.sqrt(matrix.length),
@@ -108,6 +118,9 @@ export function invert(
     return inverseMatrix;
 }
 
+/**
+ * @memberof Matrix
+ */
 export function transpose(matrix: number[], n: number = Math.sqrt(matrix.length)) {
     const newMatrix: number[] = [];
 
@@ -119,7 +132,9 @@ export function transpose(matrix: number[], n: number = Math.sqrt(matrix.length)
     return newMatrix;
 }
 
-
+/**
+ * @memberof Matrix
+ */
 export function getOrigin(matrix: number[], n: number = Math.sqrt(matrix.length)) {
     const originMatrix: number[] = [];
     const w = matrix[n * n - 1];
@@ -130,6 +145,9 @@ export function getOrigin(matrix: number[], n: number = Math.sqrt(matrix.length)
     return originMatrix;
 }
 
+/**
+ * @memberof Matrix
+ */
 export function fromTranslation(pos: number[], n: number) {
     const newMatrix = createIdentityMatrix(n);
 
@@ -138,6 +156,10 @@ export function fromTranslation(pos: number[], n: number) {
     }
     return newMatrix;
 }
+
+/**
+ * @memberof Matrix
+ */
 export function convertPositionMatrix(matrix: number[], n: number) {
     const newMatrix = matrix.slice();
 
@@ -148,6 +170,9 @@ export function convertPositionMatrix(matrix: number[], n: number) {
     return newMatrix;
 }
 
+/**
+ * @memberof Matrix
+ */
 export function convertDimension(matrix: number[], n: number = Math.sqrt(matrix.length), m: number) {
     // n < m
     if (n === m) {
@@ -169,6 +194,9 @@ export function convertDimension(matrix: number[], n: number = Math.sqrt(matrix.
     return newMatrix;
 }
 
+/**
+ * @memberof Matrix
+ */
 export function multiplies(n: number, ...matrixes: number[][]) {
     let m: number[] = createIdentityMatrix(n);
 
@@ -178,6 +206,9 @@ export function multiplies(n: number, ...matrixes: number[][]) {
     return m;
 }
 
+/**
+ * @memberof Matrix
+ */
 export function multiply(matrix: number[], matrix2: number[], n: number = Math.sqrt(matrix.length)) {
     const newMatrix: number[] = [];
     // 1 y: n
@@ -208,6 +239,9 @@ export function multiply(matrix: number[], matrix2: number[], n: number = Math.s
     return newMatrix;
 }
 
+/**
+ * @memberof Matrix
+ */
 export function plus(pos1: number[], pos2: number[]) {
     const length = Math.min(pos1.length, pos2.length);
     const nextPos = pos1.slice();
@@ -218,6 +252,9 @@ export function plus(pos1: number[], pos2: number[]) {
     return nextPos;
 }
 
+/**
+ * @memberof Matrix
+ */
 export function minus(pos1: number[], pos2: number[]) {
     const length = Math.min(pos1.length, pos2.length);
     const nextPos = pos1.slice();
@@ -228,6 +265,9 @@ export function minus(pos1: number[], pos2: number[]) {
     return nextPos;
 }
 
+/**
+ * @memberof Matrix
+ */
 export function convertCSStoMatrix(a: number[], is2d: boolean = a.length === 6) {
     if (is2d) {
         return [
@@ -238,6 +278,10 @@ export function convertCSStoMatrix(a: number[], is2d: boolean = a.length === 6) 
     }
     return a;
 }
+
+/**
+ * @memberof Matrix
+ */
 export function convertMatrixtoCSS(a: number[], is2d: boolean = a.length === 9) {
     if (is2d) {
         return [
@@ -249,12 +293,18 @@ export function convertMatrixtoCSS(a: number[], is2d: boolean = a.length === 9) 
     return a;
 }
 
+/**
+ * @memberof Matrix
+ */
 export function calculate(matrix: number[], matrix2: number[], n: number = matrix2.length) {
     const result = multiply(matrix, matrix2, n);
     const k = result[n - 1];
     return result.map(v => v / k);
 }
 
+/**
+ * @memberof Matrix
+ */
 export function rotateX3d(matrix: number[], rad: number) {
     return multiply(
         matrix,
@@ -267,6 +317,10 @@ export function rotateX3d(matrix: number[], rad: number) {
         4,
     );
 }
+
+/**
+ * @memberof Matrix
+ */
 export function rotateY3d(matrix: number[], rad: number) {
     return multiply(
         matrix,
@@ -279,12 +333,20 @@ export function rotateY3d(matrix: number[], rad: number) {
         4,
     );
 }
+
+/**
+ * @memberof Matrix
+ */
 export function rotateZ3d(matrix: number[], rad: number) {
     return multiply(
         matrix,
         createRotateMatrix(rad, 4),
     );
 }
+
+/**
+ * @memberof Matrix
+ */
 export function scale3d(matrix: number[], [
     sx = 1,
     sy = 1,
@@ -302,6 +364,9 @@ export function scale3d(matrix: number[], [
     );
 }
 
+/**
+ * @memberof Matrix
+ */
 export function rotate(pos: number[], rad: number) {
     return calculate(
         createRotateMatrix(rad, 3),
@@ -309,6 +374,9 @@ export function rotate(pos: number[], rad: number) {
     );
 }
 
+/**
+ * @memberof Matrix
+ */
 export function translate3d(matrix, [
     tx = 0,
     ty = 0,
@@ -325,10 +393,16 @@ export function translate3d(matrix, [
         4,
     );
 }
+/**
+ * @memberof Matrix
+ */
 export function matrix3d(matrix1: number[], matrix2: number[]) {
     return multiply(matrix1, matrix2, 4);
 }
 
+/**
+ * @memberof Matrix
+ */
 export function createRotateMatrix(rad: number, n: number) {
     const cos = Math.cos(rad);
     const sin = Math.sin(rad);
@@ -344,6 +418,9 @@ export function createRotateMatrix(rad: number, n: number) {
     return m;
 }
 
+/**
+ * @memberof Matrix
+ */
 export function createIdentityMatrix(n: number) {
     const length = n * n;
     const matrix: number[] = [];
@@ -353,6 +430,10 @@ export function createIdentityMatrix(n: number) {
     }
     return matrix;
 }
+
+/**
+ * @memberof Matrix
+ */
 export function createScaleMatrix(scale: number[], n: number) {
     const m = createIdentityMatrix(n);
     const length = Math.min(scale.length, n - 1);
@@ -362,6 +443,10 @@ export function createScaleMatrix(scale: number[], n: number) {
     }
     return m;
 }
+
+/**
+ * @memberof Matrix
+ */
 export function createOriginMatrix(origin: number[], n: number) {
     const m = createIdentityMatrix(n);
     const length = Math.min(origin.length, n - 1);
@@ -372,6 +457,9 @@ export function createOriginMatrix(origin: number[], n: number) {
     return m;
 }
 
+/**
+ * @memberof Matrix
+ */
 export function createWarpMatrix(
     pos0: number[],
     pos1: number[],
@@ -413,6 +501,9 @@ export function createWarpMatrix(
     return convertDimension(transpose(h), 3, 4);
 }
 
+/**
+ * @memberof Matrix
+ */
 export function getCenter(points: number[][]) {
     return [0, 1].map(i => average(points.map(pos => pos[i])));
 }
