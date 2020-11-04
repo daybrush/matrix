@@ -301,6 +301,14 @@ export function scale3d(matrix: number[], [
         4,
     );
 }
+
+export function rotate(pos: number[], rad: number) {
+    return calculate(
+        createRotateMatrix(rad, 3),
+        convertPositionMatrix(pos, 3),
+    );
+}
+
 export function translate3d(matrix, [
     tx = 0,
     ty = 0,

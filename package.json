@@ -1,6 +1,6 @@
 {
   "name": "@scena/matrix",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "matrix for scena",
   "main": "./dist/matrix.cjs.js",
   "module": "./dist/matrix.esm.js",
