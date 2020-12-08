@@ -1,4 +1,4 @@
-import { average } from "@daybrush/utils";
+import { average, throttle, TINY_NUM } from "@daybrush/utils";
 
 function add(
     matrix: number[],
@@ -89,7 +89,8 @@ export function invert(
         // diagonal
         const identityIndex = n * i + i;
 
-        if (newMatrix[identityIndex] === 0) {
+        if (!throttle(newMatrix[identityIndex], TINY_NUM)) {
+            // newMatrix[identityIndex] = 0;
             for (let j = i + 1; j < n; ++j) {
                 if (newMatrix[n * i + j]) {
                     swap(newMatrix, inverseMatrix, i, j, n);
@@ -97,18 +98,17 @@ export function invert(
                 }
             }
         }
-        if (newMatrix[identityIndex]) {
-            divide(newMatrix, inverseMatrix, i, n, newMatrix[identityIndex]);
-        } else {
+        if (!throttle(newMatrix[identityIndex], TINY_NUM)) {
             // no inverse matrix
             return [];
         }
+        divide(newMatrix, inverseMatrix, i, n, newMatrix[identityIndex]);
         for (let j = 0; j < n; ++j) {
             const targetStartIndex = j;
             const targetIndex = j + i * n;
             const target = newMatrix[targetIndex];
 
-            if (target === 0 || i === j) {
+            if (!throttle(target, TINY_NUM) || i === j) {
                 continue;
             }
             add(newMatrix, inverseMatrix, targetStartIndex, i, n, -target);
